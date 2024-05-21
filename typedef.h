@@ -6,7 +6,7 @@
 /*   By: dongjle2 <dongjle2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 18:32:34 by dongjle2          #+#    #+#             */
-/*   Updated: 2024/05/19 22:01:43 by dongjle2         ###   ########.fr       */
+/*   Updated: 2024/05/21 15:04:23 by dongjle2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ typedef struct s_fractol
 	double		y_max;
 	double		y_min;
 	double		zoom;
+	double		left_right;
+	double		up_down;
 }	t_fractol;
 
 #endif

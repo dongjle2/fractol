@@ -6,13 +6,12 @@
 /*   By: dongjle2 <dongjle2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 18:31:25 by dongjle2          #+#    #+#             */
-/*   Updated: 2024/05/19 22:11:58 by dongjle2         ###   ########.fr       */
+/*   Updated: 2024/05/21 15:11:34 by dongjle2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 #include "typedef.h"
-#include <stdio.h>
 
 t_complex	sum_complex(t_complex x, t_complex y)
 {
@@ -31,7 +30,6 @@ t_complex	square_complex(t_complex x)
 	ret.imagine = 2 * x.real * x.imagine;
 	return (ret);
 }
-
 
 // double map(double unscaled_num, t_fractol *fractol, double old_max)
 // {
@@ -52,9 +50,8 @@ void	manipulate_pixels(t_fractol *fractol, int x, int y)
 	i = 0;
 	z.real = 0;
 	z.imagine = 0;
-	c.real = map(x, fractol->x_min, fractol->x_max, 0, WIDTH) * fractol->zoom;
-	c.imagine = map(y, fractol->y_min, fractol->y_max, 0, HEIGHT) * fractol->zoom;
-	// printf("%d %d\n", x, y);
+	c.real = (map(x, fractol->x_min, fractol->x_max, 0, WIDTH) * fractol->zoom) + fractol->left_right;
+	c.imagine = (map(y, fractol->y_min, fractol->y_max, 0, HEIGHT) * fractol->zoom) + fractol->up_down;
 	while (i < NUM_ITER)
 	{
 		z = sum_complex(square_complex(z), c);
