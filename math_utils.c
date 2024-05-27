@@ -1,18 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   complex_op.c                                       :+:      :+:    :+:   */
+/*   math_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dongjle2 <dongjle2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 18:31:25 by dongjle2          #+#    #+#             */
-/*   Updated: 2024/05/21 15:11:34 by dongjle2         ###   ########.fr       */
+/*   Updated: 2024/05/27 18:25:35 by dongjle2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 #include "typedef.h"
 
+#include "stdio.h"
+#include "stdlib.h"
 t_complex	sum_complex(t_complex x, t_complex y)
 {
 	t_complex	ret;
@@ -41,7 +43,7 @@ double map(double unscaled_num, double new_min, double new_max, double old_min, 
 	return (new_max - new_min) * (unscaled_num - old_min) / (old_max - old_min) + new_min;
 }
 
-void	manipulate_pixels(t_fractol *fractol, int x, int y)
+void	manipulate_pixels(t_fractol *fractol, t_linear_map *v, int x, int y)
 {
 	t_complex	z;
 	t_complex	c;
@@ -50,8 +52,8 @@ void	manipulate_pixels(t_fractol *fractol, int x, int y)
 	i = 0;
 	z.real = 0;
 	z.imagine = 0;
-	c.real = (map(x, fractol->x_min, fractol->x_max, 0, WIDTH) * fractol->zoom) + fractol->left_right;
-	c.imagine = (map(y, fractol->y_min, fractol->y_max, 0, HEIGHT) * fractol->zoom) + fractol->up_down;
+	c.real = v->shifed_x * fractol->zoom + fractol->left_right;
+	c.imagine = v->shifed_y * fractol->zoom + fractol->up_down;
 	while (i < NUM_ITER)
 	{
 		z = sum_complex(square_complex(z), c);

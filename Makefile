@@ -5,7 +5,7 @@ CFLAGS	:= -Wextra -Wall -Werror -Wunreachable-code -Ofast
 LIBMLX	:= ./MLX42
 HEADERS	:= -I ./include -I $(LIBMLX)/include
 LIBS	:= $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
-SRCS	:=  main.c complex_op.c
+SRCS	:=  main.c math_utils.c
 OBJS	:= ${SRCS:.c=.o}
 
 all: libmlx $(NAME)

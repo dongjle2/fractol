@@ -6,7 +6,7 @@
 /*   By: dongjle2 <dongjle2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 18:32:34 by dongjle2          #+#    #+#             */
-/*   Updated: 2024/05/21 15:04:23 by dongjle2         ###   ########.fr       */
+/*   Updated: 2024/05/27 14:44:46 by dongjle2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,13 @@ typedef struct s_fractol
 	double		up_down;
 }	t_fractol;
 
+typedef struct s_linear_map
+{
+	double normalized_x;
+	double normalized_y;
+	double scaled_x;
+	double scaled_y;
+	double shifed_x;
+	double shifed_y;
+}	t_linear_map;
 #endif
