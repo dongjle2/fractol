@@ -3,9 +3,10 @@ NAME	:= fractol
 CFLAGS	:= -Wextra -Wall -Werror -Wunreachable-code -Ofast
 
 LIBMLX	:= ./MLX42
-HEADERS	:= -I ./include -I $(LIBMLX)/include
+MLX_HEADERS	:= -I ./include -I $(LIBMLX)/include
+MY_HEADER := fractol.h
 LIBS	:= $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
-SRCS	:=  main.c math_utils.c
+SRCS	:=  main.c math_utils.c init.c
 OBJS	:= ${SRCS:.c=.o}
 
 all: libmlx $(NAME)
@@ -18,11 +19,11 @@ libmlx:
 	fi
 	@cmake $(LIBMLX) -B $(LIBMLX)/build && make -C $(LIBMLX)/build -j4
 
-%.o: %.c
-	@$(CC) $(CFLAGS) -o $@ -c $< $(HEADERS)
+%.o: %.c $(MY_HEADER)
+	@$(CC) $(CFLAGS) -o $@ -c $< $(MLX_HEADERS)
 
-$(NAME): $(OBJS) fractol.h
-	@$(CC) $(OBJS) $(LIBS) $(HEADERS) -o $(NAME)
+$(NAME): $(OBJS)
+	@$(CC) $(OBJS) $(LIBS) $(MLX_HEADERS) -o $(NAME)
 
 clean:
 	@rm -rf $(OBJS)

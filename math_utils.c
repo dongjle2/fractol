@@ -6,7 +6,7 @@
 /*   By: dongjle2 <dongjle2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 18:31:25 by dongjle2          #+#    #+#             */
-/*   Updated: 2024/05/27 18:25:35 by dongjle2         ###   ########.fr       */
+/*   Updated: 2024/05/29 15:16:47 by dongjle2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,19 +50,19 @@ void	manipulate_pixels(t_fractol *fractol, t_linear_map *v, int x, int y)
 	int			i;
 
 	i = 0;
-	z.real = 0;
-	z.imagine = 0;
-	c.real = v->shifed_x * fractol->zoom + fractol->left_right;
-	c.imagine = v->shifed_y * fractol->zoom + fractol->up_down;
+	if (fractol->type == 1)
+		config_mandel(fractol, v, &z, &c);
+	else if (fractol->type == 2)
+		config_julia(fractol, v, &z, &c);
 	while (i < NUM_ITER)
 	{
 		z = sum_complex(square_complex(z), c);
 		if (4 < z.real * z.real + z.imagine * z.imagine)
 		{
-			mlx_put_pixel(fractol->g_img, x, y, map(i, BLACK, WHITE, 0, NUM_ITER));
+			mlx_put_pixel(fractol->g_img, x, y, map(i, WHITE, BLACK, 0, NUM_ITER));
 			return ;
 		}
 		i++;
 	}
-	mlx_put_pixel(fractol->g_img, x, y, WHITE);
+	mlx_put_pixel(fractol->g_img, x, y, BLACK);
 }
