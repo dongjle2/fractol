@@ -6,7 +6,7 @@
 /*   By: dongjle2 <dongjle2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 23:39:41 by dongjle2          #+#    #+#             */
-/*   Updated: 2024/06/01 02:19:05 by dongjle2         ###   ########.fr       */
+/*   Updated: 2024/06/01 23:10:41 by dongjle2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 #include <unistd.h>
 #include <memory.h>
 
-// void	my_keyhook(mlx_key_data_t keydata, void *param)
 void	my_keyhook(mlx_key_data_t keydata, void *param)
 {
 	t_fractol	*fractol;
@@ -83,28 +82,23 @@ void	rendering(void *param)
 	fractol->update = 0;
 }
 
-int		config_input(t_fractol *fractol, int argc, char *argv[])	//change libc
+int		handle_input(t_fractol *fractol, int argc, char *argv[])
 {
-	unsigned long	i;
-	int	cnt;
+	int	argv1_atoi;
 
-	i = -1;
-	cnt = 0;
-	if (ft_atoi(argv[1]) != 1 && ft_atoi(argv[1]) != 2)
+	argv1_atoi = ft_atoi(argv[1]);
+	if (argv1_atoi != 1 && argv1_atoi != 2)
 		return (1);
-	if (!((ft_atoi(argv[1]) == 1 && argc == 2) || (ft_atoi(argv[1]) == 2 && argc == 4)))
+	if (!((argv1_atoi == 1 && argc == 2) || (argv1_atoi == 2 && argc == 4)))
 		return (1);
-	//if argv[2] contains sth other than '.' or digits->return (1);
-	if (ft_atoi(argv[1]) == 2)
+	if (argv1_atoi == 2)
 	{
-		while (i < strlen(argv[2]) && (!(('0' <= argv[2][++i] && argv[2][i] <= '9') || argv[2][i] == '.')))	//i suspicious
-			;
-		if (i != strlen(argv[2]) - 1)
+		if (!(is_valid_str(argv[2]) == 0 || is_valid_str(argv[3]) == 0))
 			return (1);
 	}
-	if (ft_atoi(argv[1]) == 1)
+	if (argv1_atoi == 1)
 		fractol->type = '1';
-	else if (ft_atoi(argv[1]) == 2)
+	else if (argv1_atoi == 2)
 	{
 		fractol->type = '2';
 		fractol->julia.c.real = ft_atof(argv[2]);
@@ -123,10 +117,8 @@ int32_t	main(int argc, char *argv[])
 		display_error();
 		return (0);
 	}
-	// fractal.g_img = NULL;
-	// fractal.mlx = NULL;
 	fractol = &fractal;
-	if (config_input(fractol, argc, argv) == 1)
+	if (handle_input(fractol, argc, argv) == 1)
 	{
 		display_error();
 		return (1);

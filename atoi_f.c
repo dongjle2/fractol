@@ -6,7 +6,7 @@
 /*   By: dongjle2 <dongjle2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 16:22:07 by dongjle2          #+#    #+#             */
-/*   Updated: 2024/05/31 19:15:22 by dongjle2         ###   ########.fr       */
+/*   Updated: 2024/06/01 23:04:30 by dongjle2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,8 @@ int	ft_atoi(const char *str)
 		str++;
 	if (*str == '+' || *str == '-')
 	{
-		if (*str == '-')
+		if (*str++ == '-')
 			sign = -1;
-		str++;
 	}
 	while ('0' <= *str && *str <= '9')
 		num = num * 10 + (*str++ - 48);
@@ -47,24 +46,16 @@ double	ft_atof(const char *str)
 		str++;
 	if (*str == '+' || *str == '-')
 	{
-		if (*str == '-')
+		if (*str++ == '-')
 			sign = -1;
-		str++;
 	}
 	while ('0' <= *str && *str <= '9')
+		integer = integer * 10 + (*str++ - '0');
+	if (*str++ == '.')
+	while ('0' <= *str && *str <= '9')
 	{
-		if (point == 0)
-			integer = integer * 10 + (*str++ - '0');
-		else if (*str == '.')
-		{
-			str++;
-			point = 1;
-		}
-		else if (point)
-		{
-			fraction /= 10;
-			integer += fraction * (*str++ - '0');
-		}
+		fraction /= 10;
+		integer += fraction * (*str++ - '0');
 	}
 	return (sign * integer);
 }

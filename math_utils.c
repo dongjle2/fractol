@@ -6,7 +6,7 @@
 /*   By: dongjle2 <dongjle2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 18:31:25 by dongjle2          #+#    #+#             */
-/*   Updated: 2024/05/31 14:34:55 by dongjle2         ###   ########.fr       */
+/*   Updated: 2024/06/01 23:36:06 by dongjle2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,13 +54,13 @@ void	manipulate_pixels(t_fractol *fractol, t_linear_map *v, int x, int y)
 		config_mandel(fractol, v, &z, &c);
 	else if (fractol->type == '2')
 		config_julia(fractol, v, &z, &c);
-	while (i < NUM_ITER)
+	while (i < fractol->num_iter)
 	{
 		z = sum_complex(square_complex(z), c);
 		if (4 < z.real * z.real + z.imagine * z.imagine)
 		{
 			mlx_put_pixel(fractol->g_img, x, y, \
-						map(i, WHITE, BLACK, 0, NUM_ITER));
+						map(i, WHITE, BLACK, 0, fractol->num_iter));
 			return ;
 		}
 		i++;
