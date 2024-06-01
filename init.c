@@ -6,7 +6,7 @@
 /*   By: dongjle2 <dongjle2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 15:08:04 by dongjle2          #+#    #+#             */
-/*   Updated: 2024/05/29 15:15:59 by dongjle2         ###   ########.fr       */
+/*   Updated: 2024/05/31 14:35:21 by dongjle2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ void	init_fractol(t_fractol	*fractol)
 	fractol->update = 1;
 }
 
-void	config_mandel(t_fractol *fractol, t_linear_map *v, t_complex *z, t_complex *c)
+void	config_mandel(\
+		t_fractol *fractol, t_linear_map *v, t_complex *z, t_complex *c)
 {
 	z->real = 0;
 	z->imagine = 0;
@@ -38,10 +39,11 @@ void	config_mandel(t_fractol *fractol, t_linear_map *v, t_complex *z, t_complex 
 	c->imagine = v->shifed_y * fractol->zoom + fractol->up_down;
 }
 
-void	config_julia(t_fractol *fractol, t_linear_map *v, t_complex *z, t_complex *c)
+void	config_julia(\
+		t_fractol *fractol, t_linear_map *v, t_complex *z, t_complex *c)
 {
-	c->real = -0.7;
-	c->imagine = 0.27015;
+	c->real = fractol->julia.c.real;
+	c->imagine = fractol->julia.c.imagine;
 	z->real = v->shifed_x * fractol->zoom + fractol->left_right;
 	z->imagine = v->shifed_y * fractol->zoom + fractol->up_down;
 }

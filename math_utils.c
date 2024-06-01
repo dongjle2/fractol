@@ -6,15 +6,13 @@
 /*   By: dongjle2 <dongjle2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 18:31:25 by dongjle2          #+#    #+#             */
-/*   Updated: 2024/05/29 15:16:47 by dongjle2         ###   ########.fr       */
+/*   Updated: 2024/05/31 14:34:55 by dongjle2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 #include "typedef.h"
 
-#include "stdio.h"
-#include "stdlib.h"
 t_complex	sum_complex(t_complex x, t_complex y)
 {
 	t_complex	ret;
@@ -26,8 +24,8 @@ t_complex	sum_complex(t_complex x, t_complex y)
 
 t_complex	square_complex(t_complex x)
 {
-	t_complex ret;
-	
+	t_complex	ret;
+
 	ret.real = x.real * x.real - x.imagine * x.imagine;
 	ret.imagine = 2 * x.real * x.imagine;
 	return (ret);
@@ -38,9 +36,11 @@ t_complex	square_complex(t_complex x)
 // 	return ((fractol->x_max - fractol->x_min) * unscaled_num / old_max) + fractol->x_min;
 // }
 
-double map(double unscaled_num, double new_min, double new_max, double old_min, double old_max)
+double map(double unscaled_num, \
+		double new_min, double new_max, double old_min, double old_max)
 {
-	return (new_max - new_min) * (unscaled_num - old_min) / (old_max - old_min) + new_min;
+	return ((new_max - new_min) * (unscaled_num - old_min) / \
+						(old_max - old_min) + new_min);
 }
 
 void	manipulate_pixels(t_fractol *fractol, t_linear_map *v, int x, int y)
@@ -50,16 +50,17 @@ void	manipulate_pixels(t_fractol *fractol, t_linear_map *v, int x, int y)
 	int			i;
 
 	i = 0;
-	if (fractol->type == 1)
+	if (fractol->type == '1')
 		config_mandel(fractol, v, &z, &c);
-	else if (fractol->type == 2)
+	else if (fractol->type == '2')
 		config_julia(fractol, v, &z, &c);
 	while (i < NUM_ITER)
 	{
 		z = sum_complex(square_complex(z), c);
 		if (4 < z.real * z.real + z.imagine * z.imagine)
 		{
-			mlx_put_pixel(fractol->g_img, x, y, map(i, WHITE, BLACK, 0, NUM_ITER));
+			mlx_put_pixel(fractol->g_img, x, y, \
+						map(i, WHITE, BLACK, 0, NUM_ITER));
 			return ;
 		}
 		i++;

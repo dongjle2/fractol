@@ -6,7 +6,7 @@ LIBMLX	:= ./MLX42
 MLX_HEADERS	:= -I ./include -I $(LIBMLX)/include
 MY_HEADER := fractol.h
 LIBS	:= $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
-SRCS	:=  main.c math_utils.c init.c
+SRCS	:=  main.c math_utils.c init.c utils.c atoi_f.c
 OBJS	:= ${SRCS:.c=.o}
 
 all: libmlx $(NAME)

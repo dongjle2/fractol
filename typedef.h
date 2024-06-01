@@ -6,7 +6,7 @@
 /*   By: dongjle2 <dongjle2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 18:32:34 by dongjle2          #+#    #+#             */
-/*   Updated: 2024/05/29 15:03:04 by dongjle2         ###   ########.fr       */
+/*   Updated: 2024/05/31 14:25:20 by dongjle2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,16 @@ typedef struct s_complex
 	double imagine;
 }	t_complex;
 
+typedef struct s_julia
+{
+	t_complex c;
+}	t_julia;
+
 typedef struct s_fractol
 {
 	mlx_t		*mlx;
 	mlx_image_t	*g_img;
+	t_julia		julia;
 	char		type;
 	double		x_max;
 	double		x_min;
@@ -44,4 +50,5 @@ typedef struct s_linear_map
 	double shifed_x;
 	double shifed_y;
 }	t_linear_map;
+
 #endif
