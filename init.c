@@ -6,7 +6,7 @@
 /*   By: dongjle2 <dongjle2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 15:08:04 by dongjle2          #+#    #+#             */
-/*   Updated: 2024/06/11 17:49:42 by dongjle2         ###   ########.fr       */
+/*   Updated: 2024/06/11 18:36:32 by dongjle2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ void	config_mandel(\
 {
 	z->real = 0;
 	z->imagine = 0;
-	c->real = v->shifed_x * fractol->zoom + fractol->left_right;
-	c->imagine = v->shifed_y * fractol->zoom + fractol->up_down;
+	c->real = v->shifed_x * fractol->zoom;
+	c->imagine = v->shifed_y * fractol->zoom;
 }
 
 void	config_julia(\
@@ -52,8 +52,8 @@ void	config_julia(\
 {
 	c->real = fractol->julia.c.real;
 	c->imagine = fractol->julia.c.imagine;
-	z->real = v->shifed_x * fractol->zoom + fractol->left_right;
-	z->imagine = v->shifed_y * fractol->zoom + fractol->up_down;
+	z->real = v->shifed_x * fractol->zoom;
+	z->imagine = v->shifed_y * fractol->zoom;
 }
 
 void	init_mandelbrot(t_fractol *fractol)

@@ -6,7 +6,7 @@
 /*   By: dongjle2 <dongjle2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 23:39:41 by dongjle2          #+#    #+#             */
-/*   Updated: 2024/06/11 18:06:56 by dongjle2         ###   ########.fr       */
+/*   Updated: 2024/06/11 18:41:39 by dongjle2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,13 @@ void	my_keyhook(mlx_key_data_t keydata, void *param)
 	if (mlx_is_key_down(fractol->mlx, MLX_KEY_R))
 		init_linear_map(&fractol->mapped);
 	if (mlx_is_key_down(fractol->mlx, MLX_KEY_RIGHT))
-		fractol->left_right += fractol->zoom * 0.25;
+		fractol->left_right += fractol->zoom * 0.5;
 	if (mlx_is_key_down(fractol->mlx, MLX_KEY_LEFT))
-		fractol->left_right -= fractol->zoom * 0.25;
+		fractol->left_right -= fractol->zoom * 0.5;
 	if (mlx_is_key_down(fractol->mlx, MLX_KEY_UP))
-		fractol->up_down -= fractol->zoom * 0.25;
+		fractol->up_down -= fractol->zoom * 0.5;
 	if (mlx_is_key_down(fractol->mlx, MLX_KEY_DOWN))
-		fractol->up_down += fractol->zoom * 0.25;
+		fractol->up_down += fractol->zoom * 0.5;
 	fractol->update = 1;
 	rendering(fractol);
 }
@@ -47,7 +47,6 @@ void	my_scrollhook(double xdelta, double ydelta, void *param)
 	t_fractol	*fractol;
 
 	fractol = (t_fractol *)param;
-	fractol->zoom = 1;
 	if (0 < ydelta || 0 < xdelta)
 		fractol->zoom *= 0.9;
 	else if (ydelta < 0)
@@ -69,15 +68,15 @@ void	rendering(void *param)
 	x = -1;
 	while (++x < (int)f->g_img->width)
 	{
-		v.normalized_x = ((double)x + f->left_right ) / WIDTH;
+		v.normalized_x = (double)x / WIDTH + f->left_right;
 		v.shifed_x = f->x_min + \
-					(f->x_max - f->x_min) * v.normalized_x / f->zoom;
+					(f->x_max - f->x_min) * v.normalized_x;
 		y = -1;
 		while (++y < (int)f->g_img->height)
 		{
-			v.normalized_y = ((double)y + f->up_down) / HEIGHT;
+			v.normalized_y = (double)y / HEIGHT + f->up_down;
 			v.shifed_y = f->y_min + \
-						(f->y_max - f->y_min) * v.normalized_y / f->zoom;
+						(f->y_max - f->y_min) * v.normalized_y;
 			manipulate_pixels(f, &v, x, y);
 		}
 	}
