@@ -1,6 +1,6 @@
 NAME	:= fractol
 
-CFLAGS	:= -Wextra -Wall -Werror -Wunreachable-code -Ofast
+CFLAGS	:= -Wextra -Wall -Werror -Wunreachable-code -O3 -flto
 
 LIBMLX	:= ./MLX42
 MLX_HEADERS	:= -I ./include -I $(LIBMLX)/include

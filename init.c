@@ -6,7 +6,7 @@
 /*   By: dongjle2 <dongjle2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 15:08:04 by dongjle2          #+#    #+#             */
-/*   Updated: 2024/06/02 00:21:07 by dongjle2         ###   ########.fr       */
+/*   Updated: 2024/06/11 17:49:42 by dongjle2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,22 @@ void	init_fractol(t_fractol	*fractol)
 	if (!fractol->mlx)
 		exit(EXIT_FAILURE);
 	fractol->g_img = mlx_new_image(fractol->mlx, WIDTH, HEIGHT);
-	fractol->x_max = X_MAX;
-	fractol->x_min = X_MIN;
-	fractol->y_max = Y_MAX;
-	fractol->y_min = Y_MIN;
-	if (fractol->type == '1')
+	if (fractol->g_img == NULL)
+		exit(EXIT_FAILURE);
+	if (fractol->type == '1' || fractol->type == '3')
 		init_mandelbrot(fractol);
-	fractol->left_right = 0;
-	fractol->up_down = 0;
-	fractol->zoom = 1;
+	else
+	{
+		fractol->x_max = X_MAX;
+		fractol->x_min = X_MIN;
+		fractol->y_max = Y_MAX;
+		fractol->y_min = Y_MIN;
+		fractol->num_iter = 50000000;
+	}
 	fractol->update = 1;
+	fractol->zoom = 1;
+	fractol->color = 0;
+	init_linear_map(&fractol->mapped);
 }
 
 void	config_mandel(\
@@ -52,9 +58,32 @@ void	config_julia(\
 
 void	init_mandelbrot(t_fractol *fractol)
 {
-	fractol->x_max = 1;
-	fractol->x_min = -2;
-	fractol->y_max = 1.12;
-	fractol->y_min = -1.12;
-	fractol->num_iter = 1000;
+	if (fractol->type == '1')
+	{
+		fractol->x_max = 1;
+		fractol->x_min = -2;
+		fractol->y_max = 1.12;
+		fractol->y_min = -1.12;
+		fractol->num_iter = 500;
+	}
+	else
+	{
+		fractol->x_max = 1;
+		fractol->x_min = -2;
+		fractol->y_max = 1.5;
+		fractol->y_min = -1.5;
+		fractol->num_iter = 5000;
+	}
+}
+
+
+void	init_linear_map(t_linear_map *v)
+{
+
+	v->shifed_x = 0;
+	v->shifed_y = 0;
+	v->normalized_x = 0;
+	v->normalized_y = 0;
+	v->scaled_x = 0;
+	v->scaled_y = 0;
 }
