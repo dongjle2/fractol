@@ -6,7 +6,7 @@
 /*   By: dongjle2 <dongjle2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 16:22:07 by dongjle2          #+#    #+#             */
-/*   Updated: 2024/06/01 23:04:30 by dongjle2         ###   ########.fr       */
+/*   Updated: 2024/06/12 15:55:14 by dongjle2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,10 @@ double	ft_atof(const char *str)
 	int		sign;
 	double	integer;
 	double	fraction;
-	char	point;
 
 	sign = 1;
 	integer = 0;
 	fraction = 1;
-	point = 0;
 	while (isspace(*str))
 		str++;
 	if (*str == '+' || *str == '-')
@@ -52,6 +50,7 @@ double	ft_atof(const char *str)
 	while ('0' <= *str && *str <= '9')
 		integer = integer * 10 + (*str++ - '0');
 	if (*str++ == '.')
+		;
 	while ('0' <= *str && *str <= '9')
 	{
 		fraction /= 10;

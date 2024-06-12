@@ -6,7 +6,7 @@
 /*   By: dongjle2 <dongjle2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 18:32:34 by dongjle2          #+#    #+#             */
-/*   Updated: 2024/06/11 17:26:59 by dongjle2         ###   ########.fr       */
+/*   Updated: 2024/06/12 15:58:36 by dongjle2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,23 +16,23 @@
 
 typedef struct s_complex
 {
-	double real;
-	double imagine;
+	double	real;
+	double	imagine;
 }	t_complex;
 
 typedef struct s_julia
 {
-	t_complex c;
+	t_complex	c;
 }	t_julia;
 
 typedef struct s_linear_map
 {
-	double normalized_x;
-	double normalized_y;
-	double scaled_x;
-	double scaled_y;
-	double shifed_x;
-	double shifed_y;
+	double	normalized_x;
+	double	normalized_y;
+	double	scaled_x;
+	double	scaled_y;
+	double	shifed_x;
+	double	shifed_y;
 }	t_linear_map;
 
 typedef struct s_fractol

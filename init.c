@@ -6,7 +6,7 @@
 /*   By: dongjle2 <dongjle2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 15:08:04 by dongjle2          #+#    #+#             */
-/*   Updated: 2024/06/11 18:36:32 by dongjle2         ###   ########.fr       */
+/*   Updated: 2024/06/12 15:51:14 by dongjle2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,10 +76,8 @@ void	init_mandelbrot(t_fractol *fractol)
 	}
 }
 
-
 void	init_linear_map(t_linear_map *v)
 {
-
 	v->shifed_x = 0;
 	v->shifed_y = 0;
 	v->normalized_x = 0;

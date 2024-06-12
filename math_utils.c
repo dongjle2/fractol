@@ -6,7 +6,7 @@
 /*   By: dongjle2 <dongjle2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 18:31:25 by dongjle2          #+#    #+#             */
-/*   Updated: 2024/06/11 17:29:09 by dongjle2         ###   ########.fr       */
+/*   Updated: 2024/06/12 15:50:50 by dongjle2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,34 +22,28 @@ t_complex	sum_complex(t_complex x, t_complex y)
 	return (ret);
 }
 
-t_complex	square_complex(t_complex x)
+t_complex	square_complex(t_complex x, const char type)
 {
 	t_complex	ret;
 
 	ret.real = x.real * x.real - x.imagine * x.imagine;
-	ret.imagine = 2 * x.real * x.imagine;
+	if (type == '3')
+		ret.imagine = -2 * x.real * x.imagine;
+	else
+		ret.imagine = 2 * x.real * x.imagine;
 	return (ret);
 }
 
-t_complex	square_conju_complex(t_complex x)
+double	map(double unscaled_num, double old_min, double old_max)
 {
-	t_complex	ret;
-
-	ret.real = x.real * x.real - x.imagine * x.imagine;
-	ret.imagine = -2 * x.real * x.imagine;
-	return (ret);
+	return ((BLACK - WHITE) * (unscaled_num - old_min) / \
+						(old_max - old_min) + WHITE);
 }
 
-// double map(double unscaled_num, t_fractol *fractol, double old_max)
-// {
-// 	return ((fractol->x_max - fractol->x_min) * unscaled_num / old_max) + fractol->x_min;
-// }
-
-double map(double unscaled_num, \
-		double new_min, double new_max, double old_min, double old_max)
+double	map2(double unscaled_num, double old_min, double old_max)
 {
-	return ((new_max - new_min) * (unscaled_num - old_min) / \
-						(old_max - old_min) + new_min);
+	return ((WHITE - BLACK) * (unscaled_num - old_min) / \
+						(old_max - old_min) + BLACK);
 }
 
 void	manipulate_pixels(t_fractol *f, t_linear_map *v, int x, int y)
@@ -58,30 +52,25 @@ void	manipulate_pixels(t_fractol *f, t_linear_map *v, int x, int y)
 	t_complex	c;
 	int			i;
 
-	i = 0;
+	i = -1;
 	if (f->type == '1' || f->type == '3')
 		config_mandel(f, v, &z, &c);
 	else if (f->type == '2')
 		config_julia(f, v, &z, &c);
-	while (i < f->num_iter)
+	while (++i < f->num_iter)
 	{
-		if (f->type == '3')
-			z = sum_complex(square_conju_complex(z), c);
-		else
-			z = sum_complex(square_complex(z), c);
+		z = sum_complex(square_complex(z, f->type), c);
 		if (4 < z.real * z.real + z.imagine * z.imagine)
 		{
 			if (f->color == 1)
-				mlx_put_pixel(f->g_img, x, y, map(i, WHITE, BLACK, WHITE, f->num_iter));
+				mlx_put_pixel(f->g_img, x, y, map(i, WHITE, f->num_iter));
 			else
-				mlx_put_pixel(f->g_img, x, y, map(i, BLACK, WHITE, BLACK, f->num_iter));
+				mlx_put_pixel(f->g_img, x, y, map2(i, BLACK, f->num_iter));
 			return ;
 		}
-		i++;
 	}
 	if (f->color == 1)
 		mlx_put_pixel(f->g_img, x, y, BLACK);
 	else
 		mlx_put_pixel(f->g_img, x, y, WHITE);
-
 }
