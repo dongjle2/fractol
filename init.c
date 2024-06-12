@@ -6,7 +6,7 @@
 /*   By: dongjle2 <dongjle2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 15:08:04 by dongjle2          #+#    #+#             */
-/*   Updated: 2024/06/12 15:51:14 by dongjle2         ###   ########.fr       */
+/*   Updated: 2024/06/12 19:12:16 by dongjle2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	init_fractol(t_fractol	*fractol)
 		fractol->x_min = X_MIN;
 		fractol->y_max = Y_MAX;
 		fractol->y_min = Y_MIN;
-		fractol->num_iter = 50000000;
+		fractol->num_iter = 500;
 	}
 	fractol->update = 1;
 	fractol->zoom = 1;

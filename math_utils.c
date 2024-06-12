@@ -6,7 +6,7 @@
 /*   By: dongjle2 <dongjle2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 18:31:25 by dongjle2          #+#    #+#             */
-/*   Updated: 2024/06/12 15:50:50 by dongjle2         ###   ########.fr       */
+/*   Updated: 2024/06/12 19:11:03 by dongjle2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,14 @@ t_complex	square_complex(t_complex x, const char type)
 
 double	map(double unscaled_num, double old_min, double old_max)
 {
-	return ((BLACK - WHITE) * (unscaled_num - old_min) / \
-						(old_max - old_min) + WHITE);
+	return ((BLACK - YELLOW) * (unscaled_num - old_min) / \
+						(old_max - old_min) + YELLOW);
 }
 
 double	map2(double unscaled_num, double old_min, double old_max)
 {
-	return ((WHITE - BLACK) * (unscaled_num - old_min) / \
-						(old_max - old_min) + BLACK);
+	return ((YELLOW - PINK) * (unscaled_num - old_min) / \
+						(old_max - old_min) + PINK);
 }
 
 void	manipulate_pixels(t_fractol *f, t_linear_map *v, int x, int y)

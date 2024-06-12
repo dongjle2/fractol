@@ -6,7 +6,7 @@
 /*   By: dongjle2 <dongjle2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 00:14:19 by dongjle2          #+#    #+#             */
-/*   Updated: 2024/06/12 15:58:12 by dongjle2         ###   ########.fr       */
+/*   Updated: 2024/06/12 19:10:26 by dongjle2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 # define Y_MIN -2
 # define BLACK 0x000000
 # define WHITE 0xFFFFFF
+# define YELLOW 0xFFFF40
+# define PINK 0xFFC0C00
 # define NUM_ITER 500
 # define RESET "\033[0m"
 # define RED "\033[31m"
